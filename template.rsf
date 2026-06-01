@@ -1,0 +1,14 @@
+BasicInfo:
+  Title: "mod"
+  ProductCode: "CTR-P-XXXX"
+  MakerCode: "00"
+  Category: Application
+
+TitleInfo:
+  UniqueId: 0x00000
+
+SystemControlInfo:
+  CoreVersion: 0x00000000
+
+Option:
+  UseOnSD: true
