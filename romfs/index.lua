@@ -30,6 +30,10 @@ if System.currentDirectory() == "/" then
 	System.currentDirectory("romfs:/")
 end
 TITLEi=0
+THEME_SONG = Sound.open("romfs:/ASSETS/AUDIO/01. Glory to Arstotzka (Main Theme).wav")
+if THEME_SONG then
+    Sound.play(THEME_SONG, LOOP)
+end
 NORMAL_FONT = Graphics.loadImage(System.currentDirectory().."ASSETS/FONT/NORMAL_FONT.png")
 SMALL_FONT = Graphics.loadImage(System.currentDirectory().."ASSETS/FONT/SMALL_FONT.png")
 DIGITS = Graphics.loadImage(System.currentDirectory().."ASSETS/FONT/DIGITS.png")
