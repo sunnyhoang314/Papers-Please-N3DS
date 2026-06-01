@@ -31,9 +31,9 @@ if System.currentDirectory() == "/" then
 end
 TITLEi=0
 Sound.init()
-THEME_SONG = Sound.openWav("romfs:/ASSETS/AUDIO/01. Glory to Arstotzka (Main Theme).wav", true)
+THEME_SONG = Sound.openWav("romfs:/ASSETS/AUDIO/test2.wav", true)
 if THEME_SONG then
-	Sound.play(THEME_SONG, true)
+    Sound.play(THEME_SONG, true)
 end
 
 NORMAL_FONT = Graphics.loadImage(System.currentDirectory().."ASSETS/FONT/NORMAL_FONT.png")
