@@ -30,8 +30,11 @@ if System.currentDirectory() == "/" then
 	System.currentDirectory("romfs:/")
 end
 TITLEi=0
+DEMO_BUTTON_STATE = false
 Sound.init()
 THEME_SONG = Sound.openWav("romfs:/ASSETS/AUDIO/test2.wav", true)
+BUTTON_UP_SOUND = Sound.openWav("romfs:/ASSETS/AUDIO/19. Button Up.wav", 0)
+BUTTON_DOWN_SOUND = Sound.openWav("romfs:/ASSETS/AUDIO/17. Button Down.wav", 0)
 if THEME_SONG then
     Sound.play(THEME_SONG, true)
 end
@@ -221,6 +224,7 @@ function OptionsOP()
 end
 function ScreenButton(xbut,ybut,texture,key,word)
 	word.TOUCHED=word.TOUCHED or "NO"
+	word.TOUCHED_PREV=word.TOUCHED_PREV or "NO"
 	if TOUCHx==0 and TOUCHy==0 and word.TOUCHED == "YES" and TOUCHer~="BB" then                                                                                                                        
 		if key==2 then
 		end
@@ -239,6 +243,17 @@ function ScreenButton(xbut,ybut,texture,key,word)
 			word.TOUCHED="NO"
 		end
 	end
+	-- Play sounds on button state transitions for DEMObutton
+	if key==2 then
+		if word.TOUCHED_PREV=="NO" and word.TOUCHED=="YES" then
+			Sound.play(BUTTON_DOWN_SOUND, 0)
+			Sound.pause(BUTTON_DOWN_SOUND)
+		elseif word.TOUCHED_PREV=="YES" and word.TOUCHED=="NO" then
+			Sound.play(BUTTON_UP_SOUND, 0)
+			Sound.pause(BUTTON_UP_SOUND)
+		end
+	end
+	word.TOUCHED_PREV=word.TOUCHED
 	if word.TOUCHED=="NO" then
 		Graphics.drawPartialImage(xbut, ybut, 0, 0, Graphics.getImageWidth(texture), (Graphics.getImageHeight(texture)/2), texture)
 		elseif word.TOUCHED=="YES" then
@@ -1547,3 +1562,4 @@ while true do
 	Screen.waitVblankStart()
 	oldpad = pad
 end
+
