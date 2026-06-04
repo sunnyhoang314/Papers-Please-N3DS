@@ -30,11 +30,10 @@ if System.currentDirectory() == "/" then
 	System.currentDirectory("romfs:/")
 end
 TITLEi=0
-DEMO_BUTTON_STATE = false
 Sound.init()
 THEME_SONG = Sound.openWav("romfs:/ASSETS/AUDIO/test2.wav", true)
-BUTTON_UP_SOUND = Sound.openMp3("romfs:/ASSETS/AUDIO/19. Button Up.mp3")
-BUTTON_DOWN_SOUND = Sound.openMp3("romfs:/ASSETS/AUDIO/17. Button Down.mp3")
+BUTTON_UP_SOUND = Sound.openWav("romfs:/ASSETS/AUDIO/19. Button Up.wav")
+BUTTON_DOWN_SOUND = Sound.openWav("romfs:/ASSETS/AUDIO/17. Button Down.wav")
 if THEME_SONG then
     Sound.play(THEME_SONG, true)
 end
@@ -1499,20 +1498,26 @@ while true do
 		Graphics.initBlend(BOTTOM_SCREEN)
 
 		local demoPrev = DEMO.TOUCHED
+		local exitPrev = EXIT.TOUCHED
 		if TITLEy<-128 then
 			ScreenButton(96,112,DEMObutton,2,DEMO)
 			else
 			ScreenButton(96,TITLEy+240,DEMObutton,2,DEMO)
 		end
 		if demoPrev == "NO" and DEMO.TOUCHED == "YES" then
-			Sound.play(BUTTON_DOWN_SOUND, false)
+			Sound.play(BUTTON_DOWN_SOUND, NO_LOOP)
 		elseif demoPrev == "YES" and DEMO.TOUCHED == "NO" then
-			Sound.play(BUTTON_UP_SOUND, false)
+			Sound.play(BUTTON_UP_SOUND, NO_LOOP)
 		end
 		if TITLEy<-240 then
 			ScreenButton(303,0,EXITbutton,"Exit",EXIT)
 			else
 			ScreenButton(303,TITLEy+240,EXITbutton,"Exit",EXIT)
+		end
+		if exitPrev == "NO" and EXIT.TOUCHED == "YES" then
+			Sound.play(BUTTON_DOWN_SOUND, NO_LOOP)
+		elseif exitPrev == "YES" and EXIT.TOUCHED == "NO" then
+			Sound.play(BUTTON_UP_SOUND, NO_LOOP)
 		end
 		Graphics.drawImage(-40,TITLEy,Title)
 		screenshotmake()
@@ -1541,10 +1546,6 @@ while true do
 		end
 		elseif menu=="Exit" then
 		GarbageCollection()
-		Sound.pause(BUTTON_DOWN_SOUND)
-		Sound.close(BUTTON_DOWN_SOUND)
-		Sound.pause(BUTTON_UP_SOUND)
-		Sound.close(BUTTON_UP_SOUND)
 		if THEME_SONG then
 			Sound.pause(THEME_SONG)
 			Sound.close(THEME_SONG)
