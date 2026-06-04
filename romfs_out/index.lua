@@ -1541,6 +1541,10 @@ while true do
 		end
 		elseif menu=="Exit" then
 		GarbageCollection()
+		Sound.pause(BUTTON_DOWN_SOUND)
+		Sound.close(BUTTON_DOWN_SOUND)
+		Sound.pause(BUTTON_UP_SOUND)
+		Sound.close(BUTTON_UP_SOUND)
 		if THEME_SONG then
 			Sound.pause(THEME_SONG)
 			Sound.close(THEME_SONG)
