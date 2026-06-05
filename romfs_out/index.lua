@@ -224,11 +224,15 @@ end
 function ScreenButton(xbut,ybut,texture,key,word)
 	word.TOUCHED=word.TOUCHED or "NO"
 	if TOUCHx==0 and TOUCHy==0 and word.TOUCHED == "YES" and TOUCHer~="BB" then                                                                                                                        
-		if key==2 then
-		end
+		-- if key==2 then
+		-- end
 		if key==2 then
 			if BKG_BTMS==nil then
 				loadtex()
+			end
+			if THEME_SONG then
+				Sound.close(THEME_SONG)
+				THEME_SONG = nil
 			end
 		end
 		menu=key
@@ -1487,7 +1491,16 @@ while true do
 			Graphics.termBlend()
 			
 			if Controls.check(pad,KEY_START) and Controls.check(oldpad,KEY_START) then
-				menu=0   
+				menu=0
+				DEMO.TOUCHED = "NO"
+				DEMO.TOUCHED_PREV = "NO"
+				-- Reopen theme song when returning to menu
+				if THEME_SONG == nil then
+					THEME_SONG = Sound.openWav("romfs:/ASSETS/AUDIO/test2.wav", true)
+					if THEME_SONG then
+						Sound.play(THEME_SONG, true)
+					end
+				end
 			end
 		elseif menu==0 then
 		TOUCHx,TOUCHy = Controls.readTouch()
